@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom'
 
 const Nav = (props) => {
+  let logout = e => {
+    e.preventDefault()
+    localStorage.removeItem('weatherUser')
+    props.setUser(null)
+  }
+
   return (
     <nav>
       <ul>
@@ -11,7 +17,7 @@ const Nav = (props) => {
           <Link to="/profile">Account</Link>
           }
         </li>
-        {props.user ? <li><Link to="/logout">Log Out</Link></li> : null}
+        {props.user ? <li onClick={logout}>Log Out</li> : null}
       </ul>
     </nav>
   );

@@ -11,6 +11,8 @@ const geocoder = NodeGeocoder({ provider: 'opencage', apiKey: process.env.OPENCA
 app.use(cors({
   origin: 'http://localhost:3000'
 }));
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
 
 app.get('/', async(req, res) => {
   if (!req.query.q) {
@@ -52,6 +54,16 @@ app.get('/results', async(req, res) => {
   } catch (err) {
     res.status(500).send(`Something went wrong! ${err}`)
   }
+});
+
+app.post('/auth/signup', (req, res) => {
+  // TODO find or create
+  res.send({user: req.body});
+});
+
+app.post('/auth/login', (req, res) => {
+  // TODO find user
+  res.send({user: req.body});
 });
 
 app.listen(
