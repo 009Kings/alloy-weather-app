@@ -9,12 +9,14 @@ const Home = (props) => {
   const [items, setItems] = useState([])
   const [place, setPlace] = useState('')
 
-  let getResults = () => {
+  let getResults = (e) => {
+    e.preventDefault()
+    setIsLoaded(true)
+
     fetch(`http://localhost:5000/?q=${query}`)
       .then(res => res.json())
       .then(
         (result) => {
-          setIsLoaded(true)
           console.log(result)
           setItems(result.results)
           setPlace(result.placeName)

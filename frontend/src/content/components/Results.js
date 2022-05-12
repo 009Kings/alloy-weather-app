@@ -1,12 +1,12 @@
 import ForecastCard from './ForecastCard'
 
 const Results = (props) => {
-  if (props.items.length === 0 && !props.error) {
+  if (props.items.length === 0 && !props.error && !props.isLoaded) {
     return <div>No results yet!</div>
+  } else if (props.isLoaded && props.items.length === 0) {
+    return <div>Loading...</div>;
   } else if (props.error) {
     return <div>Error: {props.error.message}</div>;
-  } else if (!props.isLoaded) {
-    return <div>Loading...</div>;
   } else {
     let forecasts = props.items.map((item, i) => (
       <ForecastCard key={`${props.place}-${item.dt}`} {...item} />
