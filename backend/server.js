@@ -96,7 +96,11 @@ app.post('/auth/login', async(req, res) => {
   }
 })
 
+// TODO: GET /forecasts — index all forecasts of a use
 
+// TODO: POST /forecasts — add a forecast to fave
+
+// TODO: DELETE /forecasts — Delete a forecast
 
 app.listen(
   PORT, 

@@ -18,7 +18,7 @@ const Login = (props) => {
     .then(
       (response) => {
         console.log(response)
-        localStorage.setItem('weatherUser', response.user)
+        localStorage.setItem('weatherUser', JSON.stringify(response))
         props.setAuthed(true)
       },
       (error) => {

@@ -2,7 +2,7 @@
 const Home = (props) => {
   return (
     <section>
-      <h3>Welcome</h3>
+      <h3>Welcome {props.user.name}!</h3>
       {/* TODO: list of SavedForecasts */}
     </section>
   );

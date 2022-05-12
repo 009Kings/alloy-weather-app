@@ -10,7 +10,7 @@ function App() {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    let isUser = localStorage.getItem('weatherUser')
+    let isUser = JSON.parse(localStorage.getItem('weatherUser'))
     if (isUser) setUser(isUser)
   }, [user])
 
