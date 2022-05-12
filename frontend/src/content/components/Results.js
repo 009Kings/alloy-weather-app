@@ -1,6 +1,4 @@
-// TODO: Convert to F or C from Kelvin. Preference stored in Local storage? 
-// K => F   (K − 273.15) × 9/5 + 32
-// K => C   K − 273.15
+import ForecastCard from './ForecastCard'
 
 const Results = (props) => {
   if (props.items.length === 0 && !props.error) {
@@ -10,15 +8,18 @@ const Results = (props) => {
   } else if (!props.isLoaded) {
     return <div>Loading...</div>;
   } else {
+    let forecasts = props.items.map((item, i) => (
+      <ForecastCard key={`${props.place}-${item.dt}`} {...item} />
+    ))
     return (
-      <section>
-        <ul>
-          {props.items.map((item, i) => (
-            <li key={`${props.place}-${item.dt}`}>
-              {item.desc}
-            </li>
-          ))}
-        </ul>
+      <section className="results">
+        <h2>Results for {props.place}</h2>
+        <div className="results-today">
+          {forecasts[0]}
+        </div>
+        <div className="results-future">
+          {forecasts.slice(1)}
+        </div>
       </section>
     );
   }
