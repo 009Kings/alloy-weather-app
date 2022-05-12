@@ -3,9 +3,14 @@ const PORT = process.env.PORT || 8000
 const axios = require('axios').default
 const express = require('express')
 const NodeGeocoder = require('node-geocoder');
+const cors = require('cors');
 
 const app = express()
 const geocoder = NodeGeocoder({ provider: 'opencage', apiKey: process.env.OPENCAGE_KEY })
+
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
 
 app.get('/', async(req, res) => {
   if (!req.query.q) {

@@ -3,11 +3,25 @@
 // K => C   K − 273.15
 
 const Results = (props) => {
-  return (
-    <section class="results">
-      There are no results yet!
-    </section>
-  );
+  if (props.items.length === 0 && !props.error) {
+    return <div>No results yet!</div>
+  } else if (props.error) {
+    return <div>Error: {props.error.message}</div>;
+  } else if (!props.isLoaded) {
+    return <div>Loading...</div>;
+  } else {
+    return (
+      <section>
+        <ul>
+          {props.items.map((item, i) => (
+            <li key={`${props.place}-${item.dt}`}>
+              {item.desc}
+            </li>
+          ))}
+        </ul>
+      </section>
+    );
+  }
 }
 
 export default Results;
