@@ -39,12 +39,13 @@ app.get('/results', async(req, res) => {
   try {
     const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${req.query.lat}&lon=${req.query.lon}&exclude=minutely,hourly,current,alerts&appid=${process.env.WEATHER_KEY}`);
     let data = response.data.daily.map(dayInfo => {
+      console.log(dayInfo.weather)
       return {
         dt: dayInfo.dt,
         high: dayInfo.temp.max,
         low: dayInfo.temp.min,
-        desc: dayInfo.weather.description,
-        icon: dayInfo.weather.icon
+        desc: dayInfo.weather[0].description,
+        icon: dayInfo.weather[0].icon
       }
     })
     res.send({ results: data, placeName: req.query.name});

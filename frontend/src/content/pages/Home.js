@@ -15,6 +15,7 @@ const Home = (props) => {
       .then(
         (result) => {
           setIsLoaded(true)
+          console.log(result)
           setItems(result.results)
           setPlace(result.placeName)
         },
