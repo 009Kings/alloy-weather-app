@@ -1,8 +1,8 @@
 const Results = (props) => {
   return (
-    <div>
+    <section class="results">
       There are no results yet!
-    </div>
+    </section>
   );
 }
 
