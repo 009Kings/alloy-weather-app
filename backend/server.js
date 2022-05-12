@@ -1,5 +1,6 @@
 require('dotenv').config()
 const PORT = process.env.PORT || 8000
+const axios = require('axios').default
 const express = require('express')
 const NodeGeocoder = require('node-geocoder');
 
@@ -11,8 +12,8 @@ app.get('/', async(req, res) => {
     res.status(412).send('Invalid search query')
   } else {
     try {
-      const results = await geocoder.geocode(req.query.q);
-      let data = results.filter(result => result.city && !result.streetName)
+      let response = await geocoder.geocode(req.query.q);
+      let data = response.filter(result => result.city && !result.streetName)
       if (data.length === 0) {
         res.status(412).send('Query needs to be a city name')
       }
@@ -25,8 +26,26 @@ app.get('/', async(req, res) => {
   }
 })
 
-app.get('/results', (req, res) => {
-  res.send(req.query);
+app.get('/results', async(req, res) => {
+  if (!req.query.lat || !req.query.lon) {
+    res.status(412).send('Invalid search query')
+    return
+  }
+  try {
+    const response = await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${req.query.lat}&lon=${req.query.lon}&exclude=minutely,hourly,current,alerts&appid=${process.env.WEATHER_KEY}`);
+    let data = response.data.daily.map(dayInfo => {
+      return {
+        dt: dayInfo.dt,
+        high: dayInfo.temp.max,
+        low: dayInfo.temp.min,
+        desc: dayInfo.weather.description,
+        icon: dayInfo.weather.icon
+      }
+    })
+    res.send({ results: data, placeName: req.query.name});
+  } catch (err) {
+    res.status(500).send(`Something went wrong! ${err}`)
+  }
 });
 
 app.listen(
