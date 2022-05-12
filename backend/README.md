@@ -24,7 +24,7 @@ run `npm start` to get 'er up and running!
 - Update your `config.json` file in your `config` folder. It is currently set up for Mac which doesn't need a username or password. If you are running Linux or Windows you'll need to set that up. [More info here](https://sequelize.org/api/v6/class/src/sequelize.js~sequelize#instance-constructor-constructor).
 - Make sure your Postgres server is running. [Postgres install here](https://www.postgresql.org/download/)
 - Create an `alloy_weather` Database
-- Run `seqeulize db:migrate` to migrate to your database
+- Run `sequelize db:migrate` to migrate to your database
 - Create an `.env` file with the parameters in the later section
 - Run `npm start` to start the server!
 

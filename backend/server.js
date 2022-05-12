@@ -23,7 +23,7 @@ app.get('/', async(req, res) => {
       let response = await geocoder.geocode(req.query.q);
       let data = response.filter(result => result.city && !result.streetName)
       if (data.length === 0) {
-        res.status(412).send('Query needs to be a city name')
+        throw new Error('Something went wrong!')
       }
       let placeName = `${data[0].city}, ${data[0].state ? `${data[0].state}, ` : ''}${data[0].country}`
       console.log(data[0])
