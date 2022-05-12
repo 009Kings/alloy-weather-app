@@ -4,6 +4,7 @@ const axios = require('axios').default
 const express = require('express')
 const NodeGeocoder = require('node-geocoder');
 const cors = require('cors');
+const db = require('./models')
 
 const app = express()
 const geocoder = NodeGeocoder({ provider: 'opencage', apiKey: process.env.OPENCAGE_KEY })
@@ -28,6 +29,7 @@ app.get('/', async(req, res) => {
       console.log(data[0])
       res.redirect(`/results?lat=${data[0].latitude}&lon=${data[0].longitude}&name=${placeName}`)
     } catch (err) {
+      console.log('🔥', err)
       res.status(500).send(`Something went wrong! ${err}`)
     }
   }
@@ -52,19 +54,49 @@ app.get('/results', async(req, res) => {
     })
     res.send({ results: data, placeName: req.query.name});
   } catch (err) {
+    console.log('🔥', err)
     res.status(500).send(`Something went wrong! ${err}`)
   }
-});
+})
 
-app.post('/auth/signup', (req, res) => {
+app.post('/auth/signup', async(req, res) => {
   // TODO find or create
-  res.send({user: req.body});
-});
+  try {
+    let [user, created] = await db.user.findOrCreate({
+      where: { email: req.body.email },
+      defaults: {
+        name: req.body.name,
+        password: req.body.password
+      }
+    })
+    if (!created) {
+      throw new Error('User Already Exists')
+    } else {
+      res.status(200).send(user.toJSON())
+    }
+  } catch (err) {
+    console.log('🔥', err)
+    res.status(500).send(`Something went wrong! ${err}`)
+  }
+})
 
-app.post('/auth/login', (req, res) => {
-  // TODO find user
-  res.send({user: req.body});
-});
+app.post('/auth/login', async(req, res) => {
+  try {
+    let user = await db.user.findOne({
+      where: { email: req.body.email, password: req.body.password}
+    })
+    if (!user) {
+      throw new Error('Invalid Login Credentials')
+    } else {
+      res.status(200).send(user.toJSON())
+    }
+  } catch (err) {
+    console.log('🔥', err)
+    res.status(500).send(`Something went wrong! ${err}`)
+  }
+})
+
+
 
 app.listen(
   PORT, 
