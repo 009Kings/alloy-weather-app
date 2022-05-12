@@ -62,11 +62,27 @@ main {
 .forecast-card {
   padding: 1em .5em;
   margin: .5em;
-  border: 1px solid gray;
-  border-radius: 3px;
-  width: fit-content;
-  height: 10em;
+  border: 2px solid rgba(191, 191, 191, 0.803);
+  border-radius: 4px;
+  width: 12em;
+  height: 12em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: 3px 3px 15px 1px rgba(0, 0, 0, 0.25);
+}
+
+.fave {
+  border: 2px solid rgb(181, 38, 38);
+  border-radius: 4px;
+  color:rgb(181, 38, 38);
+  width: fit-content;
+  padding: .25em;
+  background-color: white;
+  box-shadow: 1px 1px 3px 1px rgba(75, 0, 0, 0.331);
+  transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.fave:hover {
+  box-shadow: 1px 1px 5px 3px rgba(75, 0, 0, 0.331);
 }
