@@ -13,12 +13,24 @@ run `npm start` to get 'er up and running!
 * Node-Geocoder — for turning text inputs into sweet sweet lat/long
 * Axios — for the HTTP requests to our API
 * Sequelize — Postgres ORM
+* `sequelize-cli` - command line interface for Sequelize
+* pg — postgres
 * [Open Weather API](https://openweathermap.org/api/one-call-api) — API that handles our weather
 * [Open Cage Data](https://opencagedata.com/) — Data source for our geocoding
 
+## Setup
+
+- Run `npm install`
+- Update your `config.json` file in your `config` folder. It is currently set up for Mac which doesn't need a username or password. If you are running Linux or Windows you'll need to set that up.
+- Make sure your Postgres server is running
+- Create an `alloy_weather` Database
+- Run `seqeulize db:migrate` to migrate to your database
+- Create an `.env` file with the parameters in the later section
+- Run `npm start` to start the server!
+
 ### What's in my .ENV?
 
-- *PORT*: Pick a port, any port! 
+- *PORT*: Pick a port, any port! (not really, pick 5000 because that's what I have the front-end set to)
 - *WEATHER_KEY*: API key for Open Weather API
 - *OPENCAGE_KEY*: API key for Open Cage Data
 
@@ -29,10 +41,9 @@ run `npm start` to get 'er up and running!
 | /results | GET | index results for a specific query |
 | /auth/signup | POST | Signup |
 | /auth/login | POST | Login |
-| /profile | GET | 🔒 Index a user's saved forecasts |
-
-If there are more than two *cities* found with a query, it will send back a list. Front end will requery with the more specific option chosen.
-Api issues rendered ^this useless. Instead will have a msg "Not the result you were expecting? Try being more specific"
+| /forecasts | GET | 🔒 Index a user's saved forecasts |
+| /forecasts | POST | 🔒 Add a forecast associated with user |
+| /forecasts | DELETE | 🔒 Remove a forecast |
 
 ### DB Structure
 
