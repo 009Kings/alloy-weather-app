@@ -36,7 +36,7 @@ run `npm start` to get 'er up and running!
 
 ### Routes
 
-| path | Method|  function |
+| path | Method | function |
 | / | GET or POST | take a user's query and turn it into lat/long. Redirect |
 | /results | GET | index results for a specific query |
 | /auth/signup | POST | Signup |
