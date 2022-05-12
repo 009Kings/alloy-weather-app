@@ -1,4 +1,8 @@
-# Option 2 Take Home Prompt
+# Sarah King's Weather App
+
+To get started, fork and clone this repository. Frontend and Backend both have Readme's to help you get started.
+
+## Option 2 Take Home Prompt
 We would like you to build a simple weather app. Please don't spend more than 3-4 hours on this project.
 
 Our stack is React and NodeJS (Express) and Mongo (although we will be migrating to Postgres soon!), so while it's not required that you use that exact same stack, we'd recommend aiming to use as much of that technology as possible.

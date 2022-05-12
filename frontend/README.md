@@ -4,7 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Getting started
 
-run `npm start` to get 'er up and running!
+- Run `npm i` to install dependencies
+- Run `npm start` to get 'er up and running!
 
 ### Technologies used
 
@@ -17,8 +18,3 @@ run `npm start` to get 'er up and running!
 | / | home; includes search and results |
 | /auth | Signup and Login forms are here |
 | /profile | 🔒 Shows a user's saved forecasts |
-
-
-
-
-### IN PROGRESS
