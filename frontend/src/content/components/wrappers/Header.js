@@ -3,7 +3,7 @@ import Nav from '../Nav'
 const Header = (props) => {
   return (
     <header>
-      <Nav />
+      <Nav user={props.user} />
     </header>
   );
 }

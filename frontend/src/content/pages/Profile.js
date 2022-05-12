@@ -1,5 +1,4 @@
 // import SavedForecast from '../components/SavedForecast'
-
 const Home = (props) => {
   return (
     <section>
